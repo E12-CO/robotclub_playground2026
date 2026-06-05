@@ -151,7 +151,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>/home/tinlethax/ROS2_WS/src/robotclub_playground/models/field/meshes/Simworld.obj</uri>
+              <uri>model://field/meshes/Simworld.obj</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
