@@ -8,9 +8,12 @@
         walk_kp: 2.2
         walk_ki: 0.001
         walk_kd: 0.01
+        
         walk_max_vel: 2.5
-        walk_vel_filter: 0.2
+        walk_min_vel: 0.4
         walk_goal_tolerance: 0.04
+        lookahead_ff_points: 10
+        lookahead_distance: 0.6
         
         rotate_kp: 2.3
         rotate_ki: 0.0001
