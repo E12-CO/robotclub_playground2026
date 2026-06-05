@@ -1,0 +1,11 @@
+r1/twist_mux:
+  ros__parameters:
+    topics:
+      irob:
+        topic   : cmd_vel_irob_auto
+        timeout : 0.5
+        priority: 10
+      joystick:
+        topic   : cmd_vel_manual
+        timeout : 0.5
+        priority: 100

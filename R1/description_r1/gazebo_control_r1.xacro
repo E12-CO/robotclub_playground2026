@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<gazebo>
+		<plugin name="holonomic_control_r1" filename="libgazebo_ros_planar_move.so">
+      		 <ros>
+	                 <namespace>/r1</namespace>
+                 </ros>
+      		<odometry_frame>odom_r1</odometry_frame>
+      		<update_rate>20.0</update_rate>
+      		<robot_base_frame>base_link_r1</robot_base_frame>
+			<publish_odom_tf>false</publish_odom_tf>
+    	</plugin>
+  </gazebo>
+
+</robot>

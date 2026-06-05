@@ -1,0 +1,20 @@
+/r1/irob_maneuv3r_r1:
+    ros__parameters:
+        map_frame_id: "map"
+        odom_frame_id: "odom"
+        robot_frame_id: "base_link_r1"
+        use_odom_tf_only: false
+        
+        walk_kp: 2.2
+        walk_ki: 0.001
+        walk_kd: 0.01
+        walk_max_vel: 2.5
+        walk_vel_filter: 0.2
+        walk_goal_tolerance: 0.04
+        
+        rotate_kp: 2.3
+        rotate_ki: 0.0001
+        rotate_kd: 0.0
+        rotate_max_vel: 1.1
+        rotate_goal_tolerance: 0.035
+        
