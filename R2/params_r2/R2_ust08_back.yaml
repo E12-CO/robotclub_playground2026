@@ -1,8 +1,0 @@
-r2/urg_node_back:
-  ros__parameters:
-    serial_port: "/dev/hokuyo_L2204702"
-    laser_frame_id: "lidar_link_2_r2"
-    laser_topic: "scan_2"
-    angle_offset: 0.0
-    min_angle: -1.48353  # -85 degree
-    max_angle: 1.48353   # 85 degree

@@ -44,9 +44,9 @@ def generate_launch_description():
                         namespace='r2',
                         output='screen')
 
-    carto_map = IncludeLaunchDescription(
+    carto_localize = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory(package_name),'launch','carto_mapping.launch.py'
+                    get_package_share_directory(package_name),'launch','carto_localization.launch.py'
                 )]), launch_arguments={'use_sim_time': 'true'}.items()
     )
 
@@ -57,28 +57,14 @@ def generate_launch_description():
         name='irob_maneuv3r_r1',
         namespace = 'r1',
         output='screen',
-        parameters=[os.path.join(get_package_share_directory(package_name), 'params_global', 'irob_maneuv3r_sim_r1.yaml')]
+        parameters=[os.path.join(get_package_share_directory(package_name), 'R1/params_r1', 'irob_maneuv3r_sim_r1.yaml')]
     )
     
-    irob_maneuv3r_r2_instant = Node(
-        package='irob_maneuv3r',
-        executable='iRob_maneuv3r',
-        #name='irob_maneu3r_r2',
-        namespace = 'r2',
-        output='screen',
-        remappings=[
-            ('cmd_vel_irob_auto', 'cmd_vel'),
-            ],
-        parameters=[os.path.join(get_package_share_directory(package_name), 'params_global', 'irob_maneuv3r_sim_r2.yaml')]
-    )
-
     # Launch them all!
     return LaunchDescription([
         rsp, # Launch the Robot State Publisher
         ExecuteProcess(cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_init.so', '-s', 'libgazebo_ros_factory.so',world_path], output='screen'),
         spawn_r1,
-        carto_map,
-        #spawn_r2,
+        carto_localize,
         irob_maneuv3r_r1_instant,
-        #irob_maneuv3r_r2_instant
     ])

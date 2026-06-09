@@ -24,37 +24,37 @@ def generate_launch_description():
     # Configuration file folder path
     configuration_directory = LaunchConfiguration('configuration_directory',default= os.path.join(get_package_share_directory(pkg_name), 'R1/params_r1') )
     # Configuration file
-    configuration_basename = LaunchConfiguration('configuration_basename', default='R1_mapping_sim.lua')
+    configuration_basename_r1 = LaunchConfiguration('configuration_basename_r1', default='R1_localize_sim.lua')
 
-    cartographer_node = launch_ros.actions.Node(
+    # Cartographer SLAM on R1
+
+    cartographer_node_r1 = launch_ros.actions.Node(
         package='cartographer_ros',
         executable='cartographer_node',
-        name='cartographer_node',
+        name='cartographer_node_r1',
         namespace='r1',
         output='screen',
         remappings=[
-            ('imu', 'imu/data_r1')
+            ('imu', '/imu/data_r1')
             ],
         parameters=[{'use_sim_time': use_sim_time}],
         arguments=['-configuration_directory', configuration_directory,
-                   '-configuration_basename', configuration_basename]
+                   '-configuration_basename', configuration_basename_r1,
+                   '-load_state_filename', os.path.join(get_package_share_directory(pkg_name), 'map', 'playground2026_map.pbstream'),
+                   '-load_frozen_state true']
     )
 
-    cartographer_occupancy_grid_node = launch_ros.actions.Node(
+    cartographer_occupancy_grid_node_r1 = launch_ros.actions.Node(
         package='cartographer_ros',
         executable='cartographer_occupancy_grid_node',
-        name='cartographer_occupancy_grid_node',
+        name='cartographer_occupancy_grid_node_r1',
         namespace='r1',
         output='screen',
         parameters=[{'use_sim_time': use_sim_time}],
         arguments=['-resolution', resolution, '-publish_period_sec', publish_period_sec]
     )
 
-    # Cartographer SLAM
-    delayed_slam_instant = launch.actions.TimerAction(period=3.0, actions=[cartographer_node, cartographer_occupancy_grid_node])
-
-
     return launch.LaunchDescription([
-        cartographer_node,
-        cartographer_occupancy_grid_node,
+        cartographer_node_r1,
+        cartographer_occupancy_grid_node_r1,
     ])
