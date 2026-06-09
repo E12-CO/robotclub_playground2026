@@ -47,7 +47,7 @@ ament_environment_hooks("${CMAKE_CURRENT_SOURCE_DIR}/env_hooks/${PROJECT_NAME}.s
 
 
 install(
- DIRECTORY launch R1 R2 params_global models worlds
+ DIRECTORY launch R1 R2 params_global paths models worlds map
  DESTINATION share/${PROJECT_NAME}
 )
 
