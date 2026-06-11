@@ -60,6 +60,14 @@ def generate_launch_description():
         parameters=[os.path.join(get_package_share_directory(package_name), 'R1/params_r1', 'irob_maneuv3r_sim_r1.yaml')]
     )
     
+    # Run the iRob_trajectory_maker backend node
+    irob_trajec_maker_instant = Node(
+        package='irob_trajectory_maker',
+        executable='irob_trajectory_maker.py',
+        namespace='r1',
+        output='screen'
+    )
+    
     # Launch them all!
     return LaunchDescription([
         rsp, # Launch the Robot State Publisher
@@ -67,4 +75,5 @@ def generate_launch_description():
         spawn_r1,
         carto_localize,
         irob_maneuv3r_r1_instant,
+        irob_trajec_maker_instant
     ])
