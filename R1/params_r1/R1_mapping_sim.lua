@@ -54,7 +54,7 @@ TRAJECTORY_BUILDER_2D.motion_filter.max_distance_meters = 0.15
 -- For localization mode
 -- TRAJECTORY_BUILDER.pure_localization_trimmer = {max_submaps_to_keep = 3,}
 
-POSE_GRAPH.optimize_every_n_nodes = 0 -- Original 60
+POSE_GRAPH.optimize_every_n_nodes = 10 -- Original 60
 POSE_GRAPH.constraint_builder.min_score = 0.80  -- Modify 0.55 to 0.65, the minium score of Fast csm, can be optimized above this score 
 POSE_GRAPH.constraint_builder.global_localization_min_score = 0.80  -- Modify 0.6 as 0.7, Minimum global positioning score below which global positioning is considered currently inaccurate
 
