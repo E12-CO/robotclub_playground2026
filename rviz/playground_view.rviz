@@ -212,6 +212,7 @@ Visualization Manager:
           Name: R1 trajectory
           Namespaces:
             Trajectory 0: true
+            Trajectory 1: true
           Topic:
             Depth: 5
             Durability Policy: Volatile
@@ -298,6 +299,32 @@ Visualization Manager:
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
+        - Class: rviz_default_plugins/Marker
+          Enabled: true
+          Name: R1 carrot
+          Namespaces:
+            carrot: true
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            Filter size: 10
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /r1/carrot
+          Value: true
+        - Class: rviz_default_plugins/Marker
+          Enabled: true
+          Name: R1 vector
+          Namespaces:
+            vel_vector: true
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            Filter size: 10
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /r1/vel_vector
+          Value: true
       Enabled: true
       Name: R1
   Enabled: true
@@ -346,7 +373,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 30.860248565673828
+      Distance: 25.896453857421875
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -361,10 +388,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.5547963380813599
+      Pitch: 1.5647963285446167
       Target Frame: base_link_r1
       Value: Orbit (rviz_default_plugins)
-      Yaw: 3.1353981494903564
+      Yaw: 3.155397891998291
     Saved: ~
 Window Geometry:
   Displays:

@@ -14,7 +14,8 @@ def generate_launch_description():
     package_name='robotclub_playground2026'
     
     world_path=os.path.join(get_package_share_directory(package_name), 'worlds/robot_playground.xml'),
-
+    rviz_path=os.path.join(get_package_share_directory(package_name), 'rviz/playground_view.rviz'),
+    
     rsp = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
                     get_package_share_directory(package_name),'launch','rsp.launch.py'
@@ -68,6 +69,13 @@ def generate_launch_description():
         output='screen'
     )
     
+    rviz_node = Node(
+        package='rviz2',
+        executable='rviz2',
+        output='screen',
+        arguments=['-d', rviz_path],
+    )
+    
     # Launch them all!
     return LaunchDescription([
         rsp, # Launch the Robot State Publisher
@@ -76,4 +84,5 @@ def generate_launch_description():
         carto_map,
         irob_maneuv3r_r1_instant,
         irob_trajec_maker_instant,
+        rviz_node
     ])

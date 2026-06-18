@@ -7,13 +7,15 @@ from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
 from launch.actions import ExecuteProcess
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-
+from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
 def generate_launch_description():
     package_name='robotclub_playground2026'
     
     world_path=os.path.join(get_package_share_directory(package_name), 'worlds/robot_playground.xml'),
+    rviz_path=os.path.join(get_package_share_directory(package_name), 'rviz/playground_view.rviz'),
+
 
     rsp = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
@@ -25,7 +27,7 @@ def generate_launch_description():
     spawn_r1 = Node(package='gazebo_ros', executable='spawn_entity.py',
                         arguments=['-topic', 'robot_description',
                                    '-entity', 'R1',
-                                   '-x', '0.5', 
+                                   '-x', '1.5', 
                                    '-y', '10.0',
                                    '-z', '0.10',
                                    '-Y', '0.0'                                   
@@ -68,6 +70,13 @@ def generate_launch_description():
         output='screen'
     )
     
+    rviz_node = Node(
+        package='rviz2',
+        executable='rviz2',
+        output='screen',
+        arguments=['-d', rviz_path],
+    )
+
     # Launch them all!
     return LaunchDescription([
         rsp, # Launch the Robot State Publisher
@@ -75,5 +84,6 @@ def generate_launch_description():
         spawn_r1,
         carto_localize,
         irob_maneuv3r_r1_instant,
-        irob_trajec_maker_instant
+        irob_trajec_maker_instant,
+        rviz_node
     ])
