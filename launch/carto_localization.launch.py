@@ -3,7 +3,7 @@
 import os
 
 import launch
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 import launch_ros.actions
 import launch_ros.descriptions
 import xacro
@@ -25,9 +25,15 @@ def generate_launch_description():
     configuration_directory = LaunchConfiguration('configuration_directory',default= os.path.join(get_package_share_directory(pkg_name), 'R1/params_r1') )
     # Configuration file
     configuration_basename_r1 = LaunchConfiguration('configuration_basename_r1', default='R1_localize_sim.lua')
-
+    # Map name
+    map_name_arg = launch.actions.DeclareLaunchArgument(
+        'map_name',
+        default_value='playground2026_map.pbstream'
+    )
+    map_name = LaunchConfiguration('map_name', default='playground2026_map.pbstream')
+    
     # Cartographer SLAM on R1
-
+    
     cartographer_node_r1 = launch_ros.actions.Node(
         package='cartographer_ros',
         executable='cartographer_node',
@@ -40,7 +46,10 @@ def generate_launch_description():
         parameters=[{'use_sim_time': use_sim_time}],
         arguments=['-configuration_directory', configuration_directory,
                    '-configuration_basename', configuration_basename_r1,
-                   '-load_state_filename', os.path.join(get_package_share_directory(pkg_name), 'map', 'playground2026_map.pbstream'),
+                   '-load_state_filename', PathJoinSubstitution([
+    get_package_share_directory(pkg_name),
+    'map',
+    LaunchConfiguration('map_name')]),
                    '-load_frozen_state true']
     )
 
@@ -55,6 +64,7 @@ def generate_launch_description():
     )
 
     return launch.LaunchDescription([
+        map_name_arg,
         cartographer_node_r1,
         cartographer_occupancy_grid_node_r1,
     ])

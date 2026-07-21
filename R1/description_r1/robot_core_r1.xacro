@@ -43,7 +43,7 @@
 		<visual>
 			<origin xyz="0 0 0.1"/>
 			<geometry>
-				<cylinder radius="0.4" length="1.2"/>
+				<box size="0.7 0.7 0.7"/>
 			</geometry>
 			<material name="green"/>
 		</visual>
@@ -51,7 +51,7 @@
 		<collision>
 			<origin xyz="0 0 0.2"/>
 			<geometry>
-				<cylinder radius="0.4" length="1.2"/>
+				<box size="0.7 0.7 0.7"/>
 			</geometry>
 		</collision>
 
@@ -211,7 +211,7 @@
   <joint name="lidar_joint1_r1" type="fixed">
     <parent link="base_link_r1"/>
     <child link="lidar_link_1_r1"/>
-    <origin xyz="0.35 0 0.03" rpy="0 0 0"/>
+    <origin xyz="0.30 0.30 0.03" rpy="0 0 0"/>
   </joint>
     
   <gazebo reference="lidar_link_1_r1">
@@ -222,9 +222,9 @@
       <ray>
         <scan>
           <horizontal>
-            <samples>720</samples>
-            <min_angle>-1.57</min_angle>
-            <max_angle>1.57</max_angle>
+            <samples>800</samples>
+            <min_angle>-1.745329</min_angle>
+            <max_angle>1.745329</max_angle>
           </horizontal>
         </scan>
         <range>
@@ -266,7 +266,7 @@
   <joint name="lidar_joint2_r1" type="fixed">
     <parent link="base_link_r1"/>
     <child link="lidar_link_2_r1"/>
-	<origin xyz="-0.35 0 0.03" rpy="0 0 3.141593"/>
+	<origin xyz="-0.30 -0.30 0.03" rpy="0 0 3.141593"/>
   </joint>
     
   <gazebo reference="lidar_link_2_r1">
@@ -277,9 +277,9 @@
       <ray>
         <scan>
           <horizontal>
-            <samples>250</samples>
-            <min_angle>-1.57</min_angle>
-            <max_angle>1.57</max_angle>
+            <samples>800</samples>
+            <min_angle>-1.745329</min_angle>
+            <max_angle>1.745329</max_angle>
           </horizontal>
         </scan>
         <range>
