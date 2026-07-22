@@ -43,14 +43,14 @@ class carto_start_trajec(Node):
 		StartTrajReq.configuration_directory = os.path.join(get_package_share_directory('robotclub_playground2026'), 'R1/params_r1')
 		StartTrajReq.configuration_basename = 'R1_localize_sim.lua'
 		StartTrajReq.use_initial_pose = True
-		StartTrajReq.initial_pose.position.x = 1.0
-		StartTrajReq.initial_pose.position.y = -1.0
+		StartTrajReq.initial_pose.position.x = 10.0
+		StartTrajReq.initial_pose.position.y = 0.0
 		StartTrajReq.initial_pose.position.z = 0.0
 		StartTrajReq.initial_pose.orientation.x = q[1]
 		StartTrajReq.initial_pose.orientation.y = q[2]
 		StartTrajReq.initial_pose.orientation.z = q[3]
 		StartTrajReq.initial_pose.orientation.w = q[0]
-		StartTrajReq.relative_to_trajectory_id = self.lastTrajecId[0] + 1 # Start on next trajectory ID
+		StartTrajReq.relative_to_trajectory_id = self.lastTrajecId[len(self.lastTrajecId)-1] + 1 # Start on next trajectory ID
 		future = self.StartTrajCli.call_async(StartTrajReq)
 		future.add_done_callback(self.startTrajecCallback)
 
@@ -96,7 +96,7 @@ class carto_start_trajec(Node):
 
 		self.get_logger().info('Finishing current trajectory')
 		FinTrajReq = FinishTrajectory.Request()
-		FinTrajReq.trajectory_id = tId[0]
+		FinTrajReq.trajectory_id = tId[len(tId)-1]
 
 		future = self.FinTrajCli.call_async(FinTrajReq)
 		future.add_done_callback(self.finishTrajCallback)

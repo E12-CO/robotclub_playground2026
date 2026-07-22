@@ -46,11 +46,12 @@ def generate_launch_description():
         parameters=[{'use_sim_time': use_sim_time}],
         arguments=['-configuration_directory', configuration_directory,
                    '-configuration_basename', configuration_basename_r1,
+                   '-start_trajectory_with_default_topics=false',
                    '-load_state_filename', PathJoinSubstitution([
     get_package_share_directory(pkg_name),
     'map',
     LaunchConfiguration('map_name')]),
-                   '-load_frozen_state true']
+                   '-load_frozen_state=true']
     )
 
     cartographer_occupancy_grid_node_r1 = launch_ros.actions.Node(

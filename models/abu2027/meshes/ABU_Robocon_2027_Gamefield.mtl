@@ -15,3 +15,6 @@ Kd 0.627451 0.627451 0.627451
 newmtl Powder_Coat_(Green)
 Kd 0.266667 0.588235 0.282353
 
+newmtl Powder_Coat_(White)
+Kd 0.964706 0.964706 0.952941
+
