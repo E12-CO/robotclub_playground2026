@@ -15,6 +15,8 @@ find_package(xacro REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(nav_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(visualization_msgs REQUIRED)
 
@@ -37,6 +39,37 @@ find_package(irob_maneuv3r REQUIRED)
 # SLAM packages
 find_package(cartographer_ros REQUIRED)
 
+# Navigation behavior
+find_package(behaviortree_cpp_v3 REQUIRED)
+
+set(nav_behavior_dependencies
+	rclcpp
+	geometry_msgs
+	nav_msgs
+	sensor_msgs
+	irob_msgs
+	behaviortree_cpp_v3
+)
+
+include_directories(
+	include/nav_behavior
+)
+
+add_executable(
+	nav_behavior
+	src/nav_behavior/nav_behavior.cpp
+)
+
+ament_target_dependencies(
+	nav_behavior
+	${nav_behavior_dependencies}
+)
+
+install(TARGETS
+	nav_behavior
+	DESTINATION lib/${PROJECT_NAME}
+)
+
 # Exporting environment hook got the Gazebo sim
 # Following hooks are used to ensure that the correct environment variables
 # will be set by exectuting 'sourece install/setup.bash' after compilation.
@@ -47,7 +80,7 @@ ament_environment_hooks("${CMAKE_CURRENT_SOURCE_DIR}/env_hooks/${PROJECT_NAME}.s
 
 
 install(
- DIRECTORY launch R1 R2 params_global paths models worlds map rviz
+ DIRECTORY launch R1 R2 params_global paths models worlds map rviz behavior
  DESTINATION share/${PROJECT_NAME}
 )
 
